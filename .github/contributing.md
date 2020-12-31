@@ -1,26 +1,13 @@
-# Vue-Page-Stack Contributing Guide
+# Vue-Stack-Router Contributing Guide
 
 Welcome ~
-
-## Install Dependencies
-
-###  Development dependencies
-
-```sh
-cd vue-page-stack
-
-```
-
-2. Playground dependencies
-
-
 
 ## Plugin Development
 
 Rollup will watch files change then build to dist.
 
 ```
-cd vue-page-stack
+cd vue-stack-router
 npm install
 npm start
 ```
@@ -30,7 +17,7 @@ npm start
 Use playground project to test the plugin on live.
 
 ```sh
-cd vue-page-stack/playground
+cd vue-stack-router/playground
 npm install
 npm start
 ```

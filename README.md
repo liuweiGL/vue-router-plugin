@@ -30,7 +30,7 @@ App.vue
       <stack-router-view
         :component="Component"
         :route="route"
-      ></stack-router-view>
+      />
     </template>
   </router-view>
 </template>
