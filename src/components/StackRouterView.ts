@@ -69,7 +69,6 @@ export const StackRouterView = defineComponent({
     const parentSuspense = instance.suspense
     const {
       renderer: {
-        p: patch,
         m: move,
         um: _unmount,
         o: { createElement }
@@ -78,19 +77,7 @@ export const StackRouterView = defineComponent({
     const storageContainer = createElement('div')
 
     sharedContext.activate = (vnode, container, anchor, isSVG, optimized) => {
-      const instance = vnode.component as ComponentInternalInstance
       move(vnode, container, anchor, MoveType.ENTER, parentSuspense)
-      // in case props have changed
-      patch(
-        instance.vnode,
-        vnode,
-        container,
-        anchor,
-        instance,
-        parentSuspense,
-        isSVG,
-        optimized
-      )
     }
 
     sharedContext.deactivate = (vnode: VNode) => {
