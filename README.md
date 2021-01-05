@@ -14,7 +14,7 @@ npm install vue-router-plugin
 main.js
 
 ```ts
-import { VueRouterPlugin } from 'vue-router-plugin'
+import VueRouterPlugin from 'vue-router-plugin'
 
 import router from './router'
 
