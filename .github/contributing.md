@@ -1,4 +1,4 @@
-# Vue-Stack-Router Contributing Guide
+# vue-router-plugin Contributing Guide
 
 Welcome ~
 
@@ -7,7 +7,7 @@ Welcome ~
 Rollup will watch files change then build to dist.
 
 ```
-cd vue-stack-router
+cd vue-router-plugin
 npm install
 npm start
 ```
@@ -17,7 +17,7 @@ npm start
 Use playground project to test the plugin on live.
 
 ```sh
-cd vue-stack-router/playground
+cd vue-router-plugin/playground
 npm install
 npm start
 ```

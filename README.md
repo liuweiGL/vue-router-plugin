@@ -1,4 +1,4 @@
-# vue-stack-router
+# vue-router-plugin
 
 The vue-router plugin for vue3
 
@@ -7,18 +7,18 @@ The vue-router plugin for vue3
 ## quick start
 
 ```
-npm install vue-stack-router
+npm install vue-router-plugin
 
 ```
 
 main.js
 
 ```ts
-import { VueStackRouter } from 'vue-stack-router'
+import { VueRouterPlugin } from 'vue-router-plugin'
 
 import router from './router'
 
-createApp(App).use(VueStackRouter, { router }).mount('#app')
+createApp(App).use(VueRouterPlugin, { router }).mount('#app')
 ```
 
 App.vue

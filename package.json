@@ -1,10 +1,10 @@
 {
-  "name": "vue-stack-router",
+  "name": "vue-router-plugin",
   "version": "1.0.0",
   "private": false,
   "license": "MIT",
-  "module": "dist/vue-stack-router.esm.js",
-  "main": "dist/vue-stack-router.umd.js",
+  "module": "dist/vue-router-plugin.esm.js",
+  "main": "dist/vue-router-plugin.umd.js",
   "typings": "dist/index.d.ts",
   "keywords": [
     "vue",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/liuweiGL/vue-stack-router"
+    "url": "https://github.com/liuweiGL/vue-router-plugin"
   },
   "scripts": {
     "start": "rollup -c rollup.config.dev.js -w",

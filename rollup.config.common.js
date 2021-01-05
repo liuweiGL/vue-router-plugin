@@ -23,7 +23,7 @@ export const outputConfig = {
     sourcemap: true
   },
   umd: {
-    name: 'VueStackRouter',
+    name: 'VueRouterPlugin',
     file: resolve(`dist/${LIBRARY_NAME}.umd.js`),
     format: `umd`,
     sourcemap: true,

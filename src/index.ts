@@ -1,6 +1,8 @@
 export * from './type/interface'
 
-export { default as VueStackRouter } from './core'
+import VueRouterPlugin from './core'
 
 export { useStack } from './core/stack'
 export { useAction } from './core/action'
+
+export default VueRouterPlugin

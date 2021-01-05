@@ -1,16 +1,16 @@
 import { pick } from 'src/lib/utils'
-import { VueStackRouterConfig } from 'src/type/interface'
+import { VueRouterPluginConfig } from 'src/type/interface'
 
 import { COMPONENT_NAME, KEY_NAME } from './constant'
 
-const defaultConfig: VueStackRouterConfig = {
+const defaultConfig: VueRouterPluginConfig = {
   keyName: KEY_NAME,
   componentName: COMPONENT_NAME
 }
 
-let config: VueStackRouterConfig
+let config: VueRouterPluginConfig
 
-export const setConfig = (options: Partial<VueStackRouterConfig>) => {
+export const setConfig = (options: Partial<VueRouterPluginConfig>) => {
   config = {
     ...defaultConfig,
     ...pick(options, 'keyName', 'componentName')

@@ -1,7 +1,7 @@
 import { App } from 'vue'
 import { Router } from 'vue-router'
 
-export type VueStackRouterConfig = {
+export type VueRouterPluginConfig = {
   /**
    * url 中的 key 参数标识
    */
@@ -13,14 +13,14 @@ export type VueStackRouterConfig = {
   componentName: string
 }
 
-export type VueStackRouterOptions = Partial<VueStackRouterConfig> & {
+export type VueRouterPluginOptions = Partial<VueRouterPluginConfig> & {
   /**
    * 路由实例
    */
   router: Router
 }
 
-export type VueStackRouterContext = {
+export type VueRouterPluginContext = {
   app: App
   router: Router
 }

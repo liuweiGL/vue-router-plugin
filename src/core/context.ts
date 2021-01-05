@@ -1,8 +1,8 @@
-import { VueStackRouterContext } from 'src/type/interface'
+import { VueRouterPluginContext } from 'src/type/interface'
 
-let context: VueStackRouterContext
+let context: VueRouterPluginContext
 
-export const setContext = (ctx: VueStackRouterContext) => {
+export const setContext = (ctx: VueRouterPluginContext) => {
   context = ctx
 }
 
