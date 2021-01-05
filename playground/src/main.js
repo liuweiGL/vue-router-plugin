@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import { VueStackRouter } from 'dist/vue-page-stack.esm'
+import VueRouterPlugin from 'dist/vue-router-plugin.esm.js'
 
 createApp(App)
-  .use(VueStackRouter, { router })
+  .use(VueRouterPlugin, { router })
   .mount('#app')
