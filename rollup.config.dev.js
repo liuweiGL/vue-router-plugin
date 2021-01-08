@@ -1,9 +1,13 @@
 import merge from 'webpack-merge'
 
-import { commonConfig, outputConfig } from './rollup.config.common'
+import { commonConfig, LIBRARY_NAME, resolve } from './rollup.config.common'
 
 const devConfig = {
-  output: outputConfig.es,
+  output: {
+    file: resolve(`playground/src/lib/${LIBRARY_NAME}.esm.js`),
+    format: 'es',
+    sourcemap: true
+  },
   watch: {
     clearScreen: true,
     include: 'src/**',

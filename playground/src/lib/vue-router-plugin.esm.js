@@ -184,6 +184,7 @@ const StackRouterView = defineComponent({
         }
         return () => {
             const { component, route } = props;
+            console.log(route);
             const key = route.query[keyName];
             const cachedVNode = stack.get(key);
             const vnode = component;

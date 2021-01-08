@@ -11,29 +11,6 @@ export const resolve = filePath => path.resolve(__dirname, filePath)
 
 export const LIBRARY_NAME = pkg.name
 
-export const outputConfig = {
-  es: {
-    file: resolve(`dist/${LIBRARY_NAME}.esm.js`),
-    format: `es`,
-    sourcemap: true
-  },
-  cjs: {
-    file: resolve(`dist/${LIBRARY_NAME}.cjs.js`),
-    format: `cjs`,
-    sourcemap: true
-  },
-  umd: {
-    name: 'VueRouterPlugin',
-    file: resolve(`dist/${LIBRARY_NAME}.umd.js`),
-    format: `umd`,
-    sourcemap: true,
-    globals: {
-      vue: 'Vue',
-      'vue-router': 'VueRouter'
-    }
-  }
-}
-
 export const commonConfig = {
   input: 'src/index.ts',
   external: ['vue', 'vue-router'],
