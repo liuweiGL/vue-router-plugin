@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "license": "MIT",
-  "module": "dist/vue-router-plugin.esm.js",
+  "browser": "dist/vue-router-plugin.esm.js",
   "main": "dist/vue-router-plugin.umd.js",
   "typings": "dist/index.d.ts",
   "keywords": [
