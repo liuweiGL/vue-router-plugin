@@ -4,7 +4,7 @@ export declare type StackItem = {
     vnode: VNode;
 };
 export declare type StackProps = {
-    value?: StackItem[];
+    items?: StackItem[];
 };
 export declare class Stack {
     private items;
