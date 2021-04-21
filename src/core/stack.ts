@@ -6,13 +6,13 @@ export type StackItem = {
 }
 
 export type StackProps = {
-  value?: StackItem[]
+  items?: StackItem[]
 }
 
 export class Stack {
   private items: StackItem[]
   constructor(props?: StackProps) {
-    this.items = props?.value ?? []
+    this.items = props?.items ?? []
   }
   push(item: StackItem) {
     return this.items.push(item)
