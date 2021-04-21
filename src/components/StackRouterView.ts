@@ -1,11 +1,16 @@
 import {
+  callWithAsyncErrorHandling,
+  ComponentInternalInstance,
   defineComponent,
+  ErrorCodes,
   getCurrentInstance,
   PropType,
+  queuePostFlushCb,
   RendererElement,
   RendererNode,
   setTransitionHooks,
-  VNode
+  SuspenseBoundary,
+  VNode,
 } from 'vue'
 import { RouteLocationNormalizedLoaded } from 'vue-router'
 
@@ -46,6 +51,42 @@ function resetShapeFlag(vnode: VNode) {
   vnode.shapeFlag = shapeFlag
 }
 
+function queuePostRenderEffect(
+  fn: Function | Function[],
+  suspense: SuspenseBoundary | null
+): void {
+  if (suspense && suspense.pendingBranch) {
+    if (Array.isArray(fn)) {
+      suspense.effects.push(...fn)
+    } else {
+      suspense.effects.push(fn)
+    }
+  } else {
+    queuePostFlushCb(fn)
+  }
+}
+
+function invokeVNodeHook(
+  hook: any,
+  instance: ComponentInternalInstance | null,
+  vnode: VNode,
+  prevVNode: VNode | null = null
+) {
+  callWithAsyncErrorHandling(hook, instance, ErrorCodes.VNODE_HOOK, [
+    vnode,
+    prevVNode
+  ])
+}
+
+function invokeArrayFns (fns: Function[], arg?: any){
+  for (let i = 0; i < fns.length; i++) {
+    fns[i](arg)
+  }
+}
+
+/**
+ * TODO: 支持 onActivated 跟 onDeactivated 事件
+ */
 export const StackRouterView = defineComponent({
   inheritRef: true,
   __isKeepAlive: true,
@@ -68,6 +109,7 @@ export const StackRouterView = defineComponent({
     const parentSuspense = instance.suspense
     const {
       renderer: {
+        p: patch,
         m: move,
         um: _unmount,
         o: { createElement }
@@ -76,11 +118,45 @@ export const StackRouterView = defineComponent({
     const storageContainer = createElement('div')
 
     sharedContext.activate = (vnode, container, anchor, isSVG, optimized) => {
+      const instance = vnode.component!
       move(vnode, container, anchor, MoveType.ENTER, parentSuspense)
+      // in case props have changed
+      patch(
+        instance.vnode,
+        vnode,
+        container,
+        anchor,
+        instance,
+        parentSuspense,
+        isSVG,
+        vnode.slotScopeIds,
+        optimized
+      )
+      queuePostRenderEffect(() => {
+        instance.isDeactivated = false
+        if ((instance as any).a) {
+          invokeArrayFns((instance as any).a)
+        }
+        const vnodeHook = vnode.props && vnode.props.onVnodeMounted
+        if (vnodeHook) {
+          invokeVNodeHook(vnodeHook, instance.parent, vnode)
+        }
+      }, parentSuspense)
     }
 
     sharedContext.deactivate = (vnode: VNode) => {
+      const instance = vnode.component!
       move(vnode, storageContainer, null, MoveType.LEAVE, parentSuspense)
+      queuePostRenderEffect(() => {
+        if ((instance as any).da) {
+          invokeArrayFns((instance as any).da)
+        }
+        const vnodeHook = vnode.props && vnode.props.onVnodeUnmounted
+        if (vnodeHook) {
+          invokeVNodeHook(vnodeHook, instance.parent, vnode)
+        }
+        instance.isDeactivated = true
+      }, parentSuspense)
     }
 
     function unmount(items?: StackItem[]) {
@@ -108,7 +184,7 @@ export const StackRouterView = defineComponent({
       }
 
       if (cachedVNode) {
-        unmount(stack.removeAfter(key))
+        unmount(stack.slice(key))
 
         if (cachedVNode.transition) {
           // recursively update transition hooks on subTree

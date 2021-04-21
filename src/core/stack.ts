@@ -20,7 +20,7 @@ export class Stack {
   pop() {
     return this.items.pop()
   }
-  removeAfter(key: string) {
+  slice(key: string) {
     const index = this.items.findIndex(item => item.key === key)
     if (index === -1) {
       return undefined
