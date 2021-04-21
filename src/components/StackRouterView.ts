@@ -1,5 +1,4 @@
 import {
-  ComponentInternalInstance,
   defineComponent,
   getCurrentInstance,
   PropType,
@@ -101,7 +100,7 @@ export const StackRouterView = defineComponent({
     return () => {
       const { component, route } = props
       const key = route.query[keyName] as string
-      const cachedVNode = stack.get(key)
+      const cachedVNode = stack.find(key)
       const vnode = component
 
       if (!vnode) {

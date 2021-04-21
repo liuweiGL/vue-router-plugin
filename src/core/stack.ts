@@ -10,34 +10,37 @@ export type StackProps = {
 }
 
 export class Stack {
-  private value: StackItem[]
+  private items: StackItem[]
   constructor(props?: StackProps) {
-    this.value = props?.value ?? []
+    this.items = props?.value ?? []
   }
   push(item: StackItem) {
-    return this.value.push(item)
+    return this.items.push(item)
   }
   pop() {
-    return this.value.pop()
+    return this.items.pop()
   }
   removeAfter(key: string) {
-    const index = this.value.findIndex(item => item.key === key)
+    const index = this.items.findIndex(item => item.key === key)
     if (index === -1) {
       return undefined
     }
     const start = index + 1
-    if (start >= this.value.length) {
+    if (start >= this.items.length) {
       return undefined
     }
-    return this.value.splice(start, this.value.length - index - 1)
+    return this.items.splice(start, this.items.length - index - 1)
   }
   clear() {
-    const value = this.value
-    this.value = []
+    const value = this.items
+    this.items = []
     return value
   }
-  get(key: string) {
-    return this.value.find(item => item.key === key)?.vnode
+  find(key: string) {
+    return this.items.find(item => item.key === key)?.vnode
+  }
+  value(){
+    return this.items
   }
 }
 
